@@ -164,4 +164,13 @@ module.exports = `
         yearBuilt: Int
         parking: Parking 
     }
+
+    type Query {
+        properties(city: String): [Listing]
+        property(listingId: String!): Listing
+    }
+
+    type Mutation {
+        incrementFavoriteCounter(listingId: String!): Listing
+    }
 `;
