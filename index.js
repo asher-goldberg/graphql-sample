@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
 
+const MongoDBConnection = require('./db/mongo');
+const ListingsCollection = MongoDBConnection.client.db().collection('listings');
+
 const checkAuth = require('./middleware/checkAuthMiddleware');
 
 // GraphQL Imports for Apollo Configuration
@@ -10,14 +13,14 @@ const PropertiesAPI = require('./datasources/properties');
 const Listings = require('./datasources/listings');
 const { ApolloServer } = require('apollo-server-express');
 
-// Store settings for Apollo Server
+// Build settings object for Apollo Server
 let apolloSettings = {
     typeDefs: [types],
-    resolvers: resolvers.resolvers,
+    resolvers: resolvers,
     dataSources: () => {
         return {
             propertiesAPI: new PropertiesAPI(),
-            listings: new Listings(resolvers.listingsCollection)
+            listings: new Listings(ListingsCollection)
         };
     }
 };
@@ -25,8 +28,13 @@ let apolloSettings = {
 async function startServer() {
     const server = new ApolloServer(apolloSettings);
 
+    // Make sure database is started
+    await MongoDBConnection.connect();
+
+    // Then start everything else
     await server.start();
 
+    // Tell Apollo to use the /graphql route
     server.applyMiddleware({ app, path:"/graphql" });
 }
 
@@ -38,12 +46,13 @@ app.listen({ port: 4000 }, () =>
 
 // Define middleware on specific routes for authentication purposes
 app.use('/graphql', function (req, res, next) {
-    let isAuthValid = checkAuth(req);
+    checkAuth(req)
+        .then((auth) => {
+            if (!auth) {
+                return res.status(401).send('You must provide a valid bearer token to use this endpoint');
+            }
 
-    if (!isAuthValid) {
-        return res.status(401).send('You must provide a bearer token to use this endpoint');
-    }
-    
-    // If auth is valid continue through the stack
-    return next();
+            // If auth is valid continue through the stack
+             return next();
+        });
 })

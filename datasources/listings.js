@@ -20,7 +20,8 @@ module.exports = class Listings extends MongoDataSource {
         return listing[0].favoriteCount;
     }
 
-    async incrementFavoriteCount(collection, id) {
+    async incrementFavoriteCount(id) {
+        // find the existing document in DB for this listing
         let listing = await this.findByFields({listingId: id})
             .then(result => {
                 return result;
@@ -35,13 +36,14 @@ module.exports = class Listings extends MongoDataSource {
             newCount = listing[0].favoriteCount + 1;
         }
 
-        collection.updateOne(
+        await this.collection.updateOne(
             { listingId: id },
             {
                 $set: { favoriteCount: newCount }
             },
             {
-                // Upsert will ensure the new favorite documents get added
+                // Upsert will ensure the new favorite documents get added if it's
+                // the first time somethng is being favorited
                 upsert: true
             }
         );
