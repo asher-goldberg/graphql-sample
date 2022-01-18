@@ -65,7 +65,7 @@ mutation IncrementFavoriteCounter($listingId: String!) {
 The full example of the mutation query in a curl request with the authorization token looks like this:
 ```
 curl --location --request POST 'http://localhost:4000/graphql' \
---header 'Authorization: token 676cfd34-e706-4cce-87ca-97f947c43bd' \
+--header 'Authorization: token {token}' \
 --header 'Content-Type: application/json' \
 --data-raw '{"query":"mutation IncrementFavoriteCounter($listingId: String!) {\r\n  incrementFavoriteCounter(listingId: $listingId) {\r\n    listingId,\r\n    favoriteCount\r\n  }\r\n}","variables":{"listingId":"59437738"}}'
 ```
@@ -73,12 +73,11 @@ curl --location --request POST 'http://localhost:4000/graphql' \
 
 - I used the `apollo-datasource-rest` and `apollo-datasource-mongodb` packages to make the 
 querying easier from the respective datasources.  In theory this could have been implemented
-without those, but I like how those packages make the setup much easier.
-- 
+without those, but those helper packages have some very quick and easy methods for getting
+this going.
 - Right now the resolver that gets the favorite counts with all of the listings
 is slightly inefficient and running the query for the favorite count for each listing
 one after the other.  Would be better if we could take all the listingIDs and get all
 the favorites for all of them in one shot.
-- Ideally there should be more tests here but I had some difficulty figuring out how to
-mock the apollo and mongo responses with Jest (I'm used to PHPUnit and Mockery).
+- Ideally there should be a full integration test that can run the queries against the graph endpoint.
 - With more time, there should be better error handling and more defensive code.

@@ -1,4 +1,4 @@
-const checkAuth = require ('../../middleware/checkAuthMiddleware');
+const checkAuth = require ('../middleware/checkAuthMiddleware');
 const {MongoClient} = require ('mongodb');
 
 describe('Test User Authentication', () => {

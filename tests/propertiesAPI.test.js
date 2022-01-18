@@ -1,5 +1,4 @@
-const { TestWatcher } = require("jest");
-const PropertiesAPI = require("../../datasources/properties");
+const PropertiesAPI = require("../datasources/properties");
 
 describe ( 'datasources/properties.js', () => {
     const mockRESTDataSource = jest.fn().mockReturnValue(
@@ -35,7 +34,7 @@ describe ( 'datasources/properties.js', () => {
     describe('test requests', () => {
         test('getProperties', async () => {
             expect.hasAssertions();
-            propertiesAPI = require('../../datasources/properties');
+            propertiesAPI = require('../datasources/properties');
             propertiesAPIInstance = new PropertiesAPI();
 
             propertiesAPIInstance.get = jest.fn().mockReturnValue([
