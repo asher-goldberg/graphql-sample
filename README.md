@@ -75,9 +75,5 @@ curl --location --request POST 'http://localhost:4000/graphql' \
 querying easier from the respective datasources.  In theory this could have been implemented
 without those, but those helper packages have some very quick and easy methods for getting
 this going.
-- Right now the resolver that gets the favorite counts with all of the listings
-is slightly inefficient and running the query for the favorite count for each listing
-one after the other.  Would be better if we could take all the listingIDs and get all
-the favorites for all of them in one shot.
 - Ideally there should be a full integration test that can run the queries against the graph endpoint.
 - With more time, there should be better error handling and more defensive code.

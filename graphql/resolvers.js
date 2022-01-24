@@ -4,11 +4,22 @@ const resolvers = {
             // Get the base set of results from the API
             let properties = await dataSources.propertiesAPI.getProperties(filter);
 
+            // Map all property IDs to retrieve favorites from Listing DS
+            let propertyIDs = properties.map((property) => {
+                return property.listingId;
+            });
+
+            let favorites = await dataSources.listings.getFavoriteCounts(propertyIDs);
+            let favoritesById = [];
+
+            // Parse favorites from Listing Datasource into KV array
+            favorites.forEach((favorite) => {
+                favoritesById[`${favorite.listingId}`] = favorite.favoriteCount;
+            })
+
             // Need to loop through the properties to attach the favorite count
-            // from the other datasource.  TODO: optimize to only run once, not
-            // for each property in the loop.
             let propertiesWithFavorite = properties.map((property) => {
-                let favoriteCount = dataSources.listings.getFavoriteCount(property.listingId);
+                let favoriteCount = favoritesById[`${property.listingId}`] ?? 0;
 
                 property.favoriteCount = favoriteCount;
                 return property;
