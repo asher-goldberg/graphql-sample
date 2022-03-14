@@ -1751,6 +1751,11 @@ camelcase@^6.2.0, camelcase@^6.2.1:
   resolved "https://registry.npmjs.org/camelcase/-/camelcase-6.2.1.tgz"
   integrity sha512-tVI4q5jjFV5CavAU8DXfza/TJcZutVKo/5Foskmsqcm0MsL91moHvwiGNnqaa2o6PF/7yT5ikDRcVcl8Rj6LCA==
 
+camelcase@^6.3.0:
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-6.3.0.tgz#5685b95eb209ac9c0c177467778c9c84df58ba9a"
+  integrity sha512-Gmy6FhYlCY7uOElZUSbxo2UCDH8owEk996gkbrpsgGtrJLM3J7jGxl9Ic7Qwwj4ivOE5AWZWRMecDdF7hqGjFA==
+
 caniuse-lite@^1.0.30001219:
   version "1.0.30001230"
   resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001230.tgz"
@@ -3788,6 +3793,14 @@ mongodb-connection-string-url@^2.3.2:
     "@types/whatwg-url" "^8.2.1"
     whatwg-url "^11.0.0"
 
+mongodb-connection-string-url@^2.5.2:
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/mongodb-connection-string-url/-/mongodb-connection-string-url-2.5.2.tgz#f075c8d529e8d3916386018b8a396aed4f16e5ed"
+  integrity sha512-tWDyIG8cQlI5k3skB6ywaEA5F9f5OntrKKsT/Lteub2zgwSUlhqEN2inGgBTm8bpYJf8QYBdA/5naz65XDpczA==
+  dependencies:
+    "@types/whatwg-url" "^8.2.1"
+    whatwg-url "^11.0.0"
+
 mongodb-memory-server-core@8.1.0:
   version "8.1.0"
   resolved "https://registry.npmjs.org/mongodb-memory-server-core/-/mongodb-memory-server-core-8.1.0.tgz"
@@ -3810,12 +3823,34 @@ mongodb-memory-server-core@8.1.0:
     uuid "^8.3.1"
     yauzl "^2.10.0"
 
-mongodb-memory-server-global@8.1.0:
-  version "8.1.0"
-  resolved "https://registry.npmjs.org/mongodb-memory-server-global/-/mongodb-memory-server-global-8.1.0.tgz"
-  integrity sha512-rkH6DA9i6qDrX9BPMrEPFLTG+sAv/KC/J6XiLJnvE/kYVWE1xk98TFavK58MRW9qNlneCGMLxFKbVZE21HjjVg==
+mongodb-memory-server-core@8.4.1:
+  version "8.4.1"
+  resolved "https://registry.yarnpkg.com/mongodb-memory-server-core/-/mongodb-memory-server-core-8.4.1.tgz#3cb853b104c80202e558e5aaea722c5ff3db3134"
+  integrity sha512-AbyqsDKEEW2mulK70Twn+qN3yso082vozYg97OmFoRTtVD94m7Uq2PxnAnKrG5fKXX/TSnWZFyRZA6dmjZyPug==
   dependencies:
-    mongodb-memory-server-core "8.1.0"
+    "@types/tmp" "^0.2.3"
+    async-mutex "^0.3.2"
+    camelcase "^6.3.0"
+    debug "^4.3.3"
+    find-cache-dir "^3.3.2"
+    get-port "^5.1.1"
+    https-proxy-agent "^5.0.0"
+    md5-file "^5.0.0"
+    mongodb "^4.4.0"
+    new-find-package-json "^1.1.0"
+    semver "^7.3.5"
+    tar-stream "^2.1.4"
+    tmp "^0.2.1"
+    tslib "^2.3.1"
+    uuid "^8.3.1"
+    yauzl "^2.10.0"
+
+mongodb-memory-server-global@8.4.1:
+  version "8.4.1"
+  resolved "https://registry.yarnpkg.com/mongodb-memory-server-global/-/mongodb-memory-server-global-8.4.1.tgz#4cb9f4aad64caf5dbaaa3b4a64cf9bcd286646a7"
+  integrity sha512-1o9elxkOqZsXe1QrNR9If1Mgql0rMGlLEhaa25hq+hbQdSUJIN4mRq+HNDSywBCMJyX76FKidEWZ8pgPmsAA1w==
+  dependencies:
+    mongodb-memory-server-core "8.4.1"
     tslib "^2.3.1"
 
 mongodb-memory-server@8.1.0:
@@ -3835,6 +3870,18 @@ mongodb@4.3.0, mongodb@^4.2.2:
     denque "^2.0.1"
     mongodb-connection-string-url "^2.3.2"
     socks "^2.6.1"
+  optionalDependencies:
+    saslprep "^1.0.3"
+
+mongodb@^4.4.0:
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-4.4.1.tgz#e604cfbe2d5e125ae156ad04b52d261bed480b99"
+  integrity sha512-IAD3nFtCR4s22vi5qjqkCBnuyDDrOW8WVSSmgHquOvGaP1iTD+XpC5tr8wAUbZ2EeZkaswwBKQFHDvl4qYcKqQ==
+  dependencies:
+    bson "^4.6.1"
+    denque "^2.0.1"
+    mongodb-connection-string-url "^2.5.2"
+    socks "^2.6.2"
   optionalDependencies:
     saslprep "^1.0.3"
 
@@ -4476,7 +4523,7 @@ slash@^3.0.0:
   resolved "https://registry.npmjs.org/slash/-/slash-3.0.0.tgz"
   integrity sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==
 
-smart-buffer@^4.1.0:
+smart-buffer@^4.1.0, smart-buffer@^4.2.0:
   version "4.2.0"
   resolved "https://registry.npmjs.org/smart-buffer/-/smart-buffer-4.2.0.tgz"
   integrity sha512-94hK0Hh8rPqQl2xXc3HsaBoOXKV20MToPkcXvwbISWLEs+64sBq5kFgn2kJDHb1Pry9yrP0dxrCI9RRci7RXKg==
@@ -4488,6 +4535,14 @@ socks@^2.6.1:
   dependencies:
     ip "^1.1.5"
     smart-buffer "^4.1.0"
+
+socks@^2.6.2:
+  version "2.6.2"
+  resolved "https://registry.yarnpkg.com/socks/-/socks-2.6.2.tgz#ec042d7960073d40d94268ff3bb727dc685f111a"
+  integrity sha512-zDZhHhZRY9PxRruRMR7kMhnf3I8hDs4S3f9RecfnGxvcBHQcKcIH/oUcEWffsfl1XxdYlA7nnlGbbTvPz9D8gA==
+  dependencies:
+    ip "^1.1.5"
+    smart-buffer "^4.2.0"
 
 source-map-support@^0.5.6:
   version "0.5.19"
